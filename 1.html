@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        &lt;?php
+        // 自定义自动加载函数
+        function myAutoloader($className) {
+            $classFile = __DIR__ . '/classes/' . $className . '.php';
+            if (file_exists($classFile)) {
+                require_once $classFile;
+            }
+        }
+
+        // 注册自动加载函数
+        spl_autoload_register('myAutoloader');
+
+        // 定义一个类文件 classes/MyClass.php
+        class MyClass {
+            public function doSomething() {
+                echo "Doing something...";
+            }
+        }
+
+        // 使用尚未定义的类 MyClass
+        $obj = new MyClass();
+        $obj->doSomething();
+        ?&gt;
+    </pre>
+</body>
+</html>
